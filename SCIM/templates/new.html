@@ -34,7 +34,7 @@
 		<tr>
 			<th>{{need.name}}</th>
 			{% for tier in tiers %}
-			<td onclick="newresource_show(this);" id="{{need.name}}_{{tier.name}}">
+			<td onclick="newresource_show(this);return false;" id="{{need.name}}_{{tier.name}}">
 				
 			</td>
 			{% endfor %}
@@ -67,7 +67,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn" onclick="$('#newresource').modal('hide');">Close</a>
+    <a href="#" class="btn" onclick="$('#newresource').modal('hide');return false;">Close</a>
     <a href="#" class="btn btn-primary">Save changes</a>
   </div>
 </div>
@@ -77,6 +77,11 @@ function newresource_show(cell) {
   // Let's get the information from the database
   // The cell.id is need_tier parse that to get the data
   alert(cell.id);
+  $.get("newresource",
+   function(data){
+     $('body').append( "Name: " + data.name ) // John
+              .append( "Time: " + data.time ); //  2pm
+   }, "json");
 
   // Now lets show the list and form
 	$('#newresource').modal('show');
