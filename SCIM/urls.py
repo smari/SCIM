@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-rom django.views.generic import ListView, TemplateView, CreateView, UpdateView
+from django.views.generic import ListView, TemplateView, CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
 
 import settings
@@ -10,7 +10,10 @@ import settings
 
 urlpatterns = patterns('',
 	url(r'^$', 'mapper.views.home'),
+	url(r'^maps/new/', 'mapper.views.new'),
+	url(r'^maps/(?P<id>\d+)/', 'mapper.views.viewmap'),
 
 	(r'^accounts/', include('registration.urls')),
+	url(r'^accounts/profile/$', UpdateView.as_view(success_url="/accounts/profile/")),
 	(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )

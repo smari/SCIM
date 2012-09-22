@@ -1,1 +1,42 @@
-# Create your views here.
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template.loader import render_to_string
+from django.template import RequestContext
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.utils.translation import ugettext as _
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.db.models import Q
+
+from django.views.generic import TemplateView, DetailView
+
+from datetime import datetime, timedelta, date
+import settings
+
+from mapper.models import *
+
+
+@login_required
+def home(request):
+        ctx = {}
+
+	ctx["maps"] = Map.objects.filter(user=request.user)
+	ctx["gallery"] = Map.objects.filter(public=True)[:5]
+
+        return render_to_response("home.html", ctx, context_instance=RequestContext(request))
+
+
+@login_required
+def new(request):
+        ctx = {}
+
+        return render_to_response("new.html", ctx, context_instance=RequestContext(request))
+
+
+def view(request, id):
+        ctx = {}
+
+        return render_to_response("view.html", ctx, context_instance=RequestContext(request))
