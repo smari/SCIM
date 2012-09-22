@@ -55,6 +55,6 @@ def get_resources(request, tier, need):
 		ctx = {}
 		t = Tier.objects.get(id=tier)
 		n = Need.objects.get(id=need)
-		ctx["resources"] = Resource.objects.filter(serviceprovider__tier = t, need = n)
+		ctx["resources"] = list(Resource.objects.filter(serviceprovider__tier = t, needs = n))
 		
 		return HttpResponse(json.dumps(ctx))
