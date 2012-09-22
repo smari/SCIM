@@ -3,16 +3,25 @@
 	<head>
 		<title>Service Input Page</title>
 		<style type="text/css">
-       
+       #explainer {
+ 				width: 400px;
+ 				border: 1px dotted blue; 
+ 				padding: 5px;
+ 				margin: 5px;      
+       }
+       #needChooser, #entityChooser {
+				 visibility: hidden;       
+       }
     </style>
 	</head>
 	<body>
-	  <div name="explainer">
+	  <div id="explainer">
 	      To describe services and resources, choose the tier, entity class and need below. Then either choose and existing service or create a new one with the textbox. Once you have chosen your service, you can add resources. 
 	  </div>
 	  <form >
-	     <div>
-			Tier: <select name="tier">
+	     <div id="tierChooser">
+			Tier: <select name="tier" onchange="document.getElementById('entityChooser').style.visibility = 'visible';">
+			  <option value="none" label="Select One"></option>
 				<option value="individual" label="individual"></option>
 				<option value="household" label="household"></option>
 				<option value="village" label="village/neighborhood"></option>
@@ -22,16 +31,18 @@
 				<option value="world" label="world"></option>
 			</select>
 			</div>
-			<div>
-			Entity Class: <select name="Entity">
+			<div id="entityChooser">
+			Entity Class: <select name="Entity" onchange="document.getElementById('needChooser').style.visibility = 'visible';">
+			  <option value="none" label="Select One"></option>
 				<option value="individual" label="individual"></option>
 				<option value="group" label="group"></option>
 				<option value="organization" label="organization"></option>	
 				<option value="state" label="state"></option>		
 			</select>
 			</div>
-			<div>
+			<div id="needChooser">
 			Need: <select name="need">
+			  <option value="none" label="Select One"></option>
 				<option value="injury" label="injury"></option>			
 				<option value="illness" label="illness"></option>
 				<option value="thirst	" label="thirst"></option>
