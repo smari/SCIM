@@ -46,12 +46,23 @@
 <div class="modal hide fade" id="newresource">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
+    <h3>Resources</h3>
   </div>
   <div class="modal-body">
-    <p>
-	ADD THE TABLE HERE!!!
-    </p>
+   <div class="row">
+      <div class="span3">
+      {% if resources %}
+      <h2>Existing Resources:</h2>
+      <p>{% for resource in resources %}
+	      {{resource.name}} <br />
+	      {% endfor %}
+      </p>
+      {% endif %}
+      </div>
+     <div class="span3"><form>
+    New Resource: <input type="text" name="resource" /></form>
+    </div>
+    </div>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" onclick="$('#newresource').modal('hide');">Close</a>
