@@ -34,7 +34,7 @@
 		<tr>
 			<th>{{need.name}}</th>
 			{% for tier in tiers %}
-			<td onclick="newresource_show(this);">
+			<td onclick="newresource_show(this);" id="{{need.name}}_{{tier.name}}">
 				
 			</td>
 			{% endfor %}
@@ -74,6 +74,11 @@
 
 <script>
 function newresource_show(cell) {
+  // Let's get the information from the database
+  // The cell.id is need_tier parse that to get the data
+  alert(cell.id);
+
+  // Now lets show the list and form
 	$('#newresource').modal('show');
 }
 
