@@ -3,13 +3,16 @@
 	<head>
 		<title>Service Input Page</title>
 		<style type="text/css">
+		   div {
+				margin-bottom: 5px;		   
+		   }
        #explainer {
  				width: 400px;
  				border: 1px dotted blue; 
  				padding: 5px;
  				margin: 5px;      
        }
-       #needChooser, #entityChooser {
+       #needChooser, #entityChooser, #serviceChooser, #resourceCreator, #submitterator  {
 				 visibility: hidden;       
        }
     </style>
@@ -41,7 +44,7 @@
 			</select>
 			</div>
 			<div id="needChooser">
-			Need: <select name="need">
+			Need: <select name="need" onchange="document.getElementById('serviceChooser').style.visibility = 'visible';">
 			  <option value="none" label="Select One"></option>
 				<option value="injury" label="injury"></option>			
 				<option value="illness" label="illness"></option>
@@ -50,6 +53,20 @@
 				<option value="cold" label="too cold"></option>
 				<option value="hot" label="too hot"></option>
 			</select>
+			</div>
+			<div id="serviceChooser">
+			Service: <br />
+			   <input type="radio" name="service" value="police" onchange="document.getElementById('resourceCreator').style.visibility = 'visible';" /> Police <br />
+			   <input type="radio" name="service" value="hospital" onchange="document.getElementById('resourceCreator').style.visibility = 'visible';" /> Hospital <br />
+			   <input type="radio" name="service" value="grid" onchange="document.getElementById('resourceCreator').style.visibility = 'visible';" /> Electric Grid<br />
+			    New Service: <input type="text" name="service" onchange="document.getElementById('resourceCreator').style.visibility = 'visible';" />
+			</div>
+			<div id="resourceCreator">
+			   
+			  Resource: <input type="text" name="resource" onfocus="document.getElementById('submitterator').style.visibility = 'visible';" />
+			</div>
+			<div id="submitterator">
+				<input type="submit" value="submit">			
 			</div>
 	  </form>
 	  
