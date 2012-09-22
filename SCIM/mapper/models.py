@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Map(models.Model):
 	name		= models.CharField(max_length=100)
 	user		= models.ForeignKey(User)
+	public		= models.BooleanField(default=False)
 
 
 class EntityClass(models.Model):

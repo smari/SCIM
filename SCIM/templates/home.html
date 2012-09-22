@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="span8">
+		<div style="float: right;">
+			<a class="btn btn-large" href="/maps/new/">Make a new SCIM</a>
+		</div>
+		<h2>Your maps</h2>
+	
+		{% for map in maps %}
+			<a href="/maps/{{map.id}}">{{map.name}}</a>
+		{% empty %}
+			You don't have any SCIM maps! Make one!
+		{% endfor %}
+	</div>
+
+	<div class="span8">
+		<h2>...</h2>
+	</div>
+</div>
+
+{% endblock %}
