@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul class="nav nav-tabs" id="entityclasstabs">
+{% for entityclass in entityclasses %}
+  <li><a href="#entityclass{{entityclass.id}}" data-toggle="tab">{{entityclass.name}}</a></li>
+{% endfor %}
+</ul>
+
+<div class="tab-content">
+{% for entityclass in entityclasses %}
+	<div class="tab-pane{% if forloop.first %} active{% endif %}" id="entityclass{{entityclass.id}}">
+	<table class="table table-bordered table-hover">
+		<tr>
+		<th></th>
+		{% for tier in tiers %}
+		<th>{{tier.name}}</th>
+		{% endfor %}
+		</tr>
+		{% for need in entityclass.need_set.all %}
+		<tr>
+			<th>{{need.name}}</th>
+			{% for tier in tiers %}
+			<td>...</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+	</div>
+{% endfor %}
+
+</div>
+
+<script>
+  $(function () {
+    $('#entityclasstabs a:first').tab('show');
+  })
+</script>
+
+{% endblock %}

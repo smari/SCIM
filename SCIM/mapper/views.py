@@ -33,6 +33,9 @@ def home(request):
 def new(request):
         ctx = {}
 
+	ctx["tiers"] = Tier.objects.all()
+	ctx["entityclasses"] = EntityClass.objects.all()
+
         return render_to_response("new.html", ctx, context_instance=RequestContext(request))
 
 

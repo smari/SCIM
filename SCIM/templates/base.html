@@ -4,8 +4,7 @@
 		<title>Simple Critical Infrastructure Maps</title>
 		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-		<link href="/static/css/bootstrap.css" rel="stylesheet">
-		<link href="/static/css/placetime.css" rel="stylesheet">
+		<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
 		
 		<script src="/static/js/OpenLayers.js"></script>
 		<script src="/static/js/jquery.js"></script>
@@ -13,7 +12,6 @@
 		<script src="/static/js/bootstrap-dropdown.js"></script>
 		<script src="/static/js/bootstrap-modal.js"></script>
 		<script src="/static/js/bootstrap-tabs.js"></script>
-		<script src="/static/js/placetime.js"></script>
 
 		<link rel="shortcut icon" href="/static/img/favicon.ico"/>
 		<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png"/>
@@ -29,8 +27,8 @@
 	<body>
 
 {% if user.is_authenticated %}
-    <div class="topbar">
-      <div class="fill">
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="/">SCIM</a>
           <ul class="nav">
@@ -51,6 +49,8 @@
       <div class="content">
 		{% block content %}{% endblock %}
       </div>
+
+	<hr/>
 
       <footer>
         <p><a href="/about/license/">License</a> &ndash; <a href="/about/authors/">Authors</a> &ndash; <a href="/about/kittens/">Kittens</a></p>
