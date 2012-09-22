@@ -18,6 +18,18 @@
 		<th>{{tier.name}}</th>
 		{% endfor %}
 		</tr>
+
+		<tr>
+		<td><i>(Service providers)</i></td>
+		{% for tier in tiers %}
+		<td>
+			{% for sp in tier.serviceprovider_set.all %}
+			{{sp.name}}<br/>
+			{% endfor %}
+		</td>
+		{% endfor %}
+		</tr>
+
 		{% for need in entityclass.need_set.all %}
 		<tr>
 			<th>{{need.name}}</th>
