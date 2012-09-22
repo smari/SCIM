@@ -39,7 +39,10 @@ def new(request):
         return render_to_response("new.html", ctx, context_instance=RequestContext(request))
 
 
-def view(request, id):
+def viewmap(request, id):
         ctx = {}
+	ctx["map"] = Map.objects.get(id=id)
+	ctx["tiers"] = Tier.objects.all()
+	ctx["entityclasses"] = EntityClass.objects.all()
 
-        return render_to_response("view.html", ctx, context_instance=RequestContext(request))
+        return render_to_response("new.html", ctx, context_instance=RequestContext(request))
