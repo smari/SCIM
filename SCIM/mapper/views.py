@@ -15,34 +15,46 @@ from django.views.generic import TemplateView, DetailView
 
 from datetime import datetime, timedelta, date
 import settings
+import simplejson as json
 
 from mapper.models import *
 
 
 @login_required
 def home(request):
-        ctx = {}
+	ctx = {}
 
 	ctx["maps"] = Map.objects.filter(user=request.user)
 	ctx["gallery"] = Map.objects.filter(public=True)[:5]
 
-        return render_to_response("home.html", ctx, context_instance=RequestContext(request))
+	return render_to_response("home.html", ctx, context_instance=RequestContext(request))
 
 
 @login_required
 def new(request):
-        ctx = {}
+	ctx = {}
 
 	ctx["tiers"] = Tier.objects.all()
 	ctx["entityclasses"] = EntityClass.objects.all()
+	
 
-        return render_to_response("new.html", ctx, context_instance=RequestContext(request))
+	return render_to_response("new.html", ctx, context_instance=RequestContext(request))
 
 
 def viewmap(request, id):
-        ctx = {}
+	ctx = {}
 	ctx["map"] = Map.objects.get(id=id)
 	ctx["tiers"] = Tier.objects.all()
 	ctx["entityclasses"] = EntityClass.objects.all()
 
-        return render_to_response("new.html", ctx, context_instance=RequestContext(request))
+	return render_to_response("new.html", ctx, context_instance=RequestContext(request))
+
+
+@login_required
+def get_resources(request, tier, need):
+		ctx = {}
+		t = Tier.objects.get(id=tier)
+		n = Need.objects.get(id=need)
+		ctx["resources"] = Resource.objects.filter(serviceprovider__tier = t, need = n)
+		
+		return HttpResponse(json.dumps(ctx))

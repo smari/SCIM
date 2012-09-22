@@ -54,7 +54,7 @@
    <div class="row">
       <div class="span3">
       {% if resources %}
-      <h2>Existing Resources:</h2>
+      <strong>Existing Resources:</strong>
       <p>{% for resource in resources %}
 	      {{resource.name}} <br />
 	      {% endfor %}
@@ -62,7 +62,7 @@
       {% endif %}
       </div>
      <div class="span3"><form>
-    New Resource: <input type="text" name="resource" /></form>
+    <strong>New Resource:</strong> <input type="text" name="resource" /></form>
     </div>
     </div>
   </div>
