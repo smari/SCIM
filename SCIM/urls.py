@@ -10,12 +10,12 @@ import settings
 
 urlpatterns = patterns('',
 	url(r'^$', 'mapper.views.home'),
-	url(r'^maps/new/', 'mapper.views.new'),
-	url(r'^maps/(?P<id>\d+)/', 'mapper.views.viewmap'),
-	url(r'^maps/resources/(?P<tier>\d+)/(?P<need>\d+)/', 'mapper.views.get_resources' ),
-	url(r'^maps/resources/new/(?P<serviceproviders>(\d+[,]{0,1})+)/(?P<needs>(\d+[,]{0,1})+)/(?P<name>\s+)/', 'mapper.views.new_resouce'),
-	url(r'^maps/serviceprovider/(?P<tier>\d+)/', 'mapper.views.get_serviceproviders' ),
-	url(r'^maps/serviceprovider/new/(?P<tier>\d+)/(?P<name>\s+)/', 'mapper.views.new_serviceprovider'),
+	url(r'^maps/new/(?P<mapname>.+)/$', 'mapper.views.new'),
+	url(r'^maps/(?P<id>\d+)/$', 'mapper.views.viewmap'),
+	url(r'^maps/resources/(?P<tier>\d+)/(?P<need>\d+)/$', 'mapper.views.get_resources' ),
+	url(r'^maps/resources/new/(?P<serviceproviders>(\d+[,]{0,1})+)/(?P<needs>(\d+[,]{0,1})+)/(?P<name>.+)/$', 'mapper.views.new_resouce'),
+	url(r'^maps/serviceprovider/(?P<tier>\d+)/$', 'mapper.views.get_serviceproviders' ),
+	url(r'^maps/serviceprovider/new/(?P<tier>\d+)/(?P<name>.+)/$', 'mapper.views.new_serviceprovider'),
 
 	url(r'^about/$', TemplateView.as_view(template_name='about/how_scim_works.html')),
 	url(r'^about/license/$', TemplateView.as_view(template_name='about/license.html')),
@@ -23,6 +23,6 @@ urlpatterns = patterns('',
 	url(r'^about/kittens/$', TemplateView.as_view(template_name='about/kittens.html')),
 
 	(r'^accounts/', include('registration.urls')),
-	url(r'^accounts/profile/$', UpdateView.as_view(success_url="/accounts/profile/")),
+	url(r'^accounts/profile/$', 'mapper.views.home'),
 	(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )

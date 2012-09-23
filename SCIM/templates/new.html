@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<h1>SCIM Map: {{map.name}}</h1>
+
 <ul class="nav nav-tabs" id="entityclasstabs">
 {% for entityclass in entityclasses %}
   <li{% if forloop.first %} class="active"{% endif %}><a href="#entityclass{{entityclass.id}}" data-toggle="tab">{{entityclass.name}}</a></li>

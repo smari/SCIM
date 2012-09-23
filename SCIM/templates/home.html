@@ -5,20 +5,42 @@
 <div class="row">
 	<div class="span6">
 		<div style="float: right;">
-			<a class="btn btn-large" href="/maps/new/">Make a new SCIM</a>
+			<a class="btn btn-large" onclick="$('#newmap').modal('show');">Make a new SCIM</a>
 		</div>
 		<h2>Your maps</h2>
 	
+		<ul>
 		{% for map in maps %}
-			<a href="/maps/{{map.id}}">{{map.name}}</a>
+			<li><a href="/maps/{{map.id}}">{{map.name}}</a></li>
 		{% empty %}
 			You don't have any SCIM maps! Make one!
 		{% endfor %}
+		</ul>
 	</div>
 
 	<div class="span6">
 		<h2>...</h2>
 	</div>
 </div>
+
+<div class="modal hide fade" id="newmap">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>New Map</h3>
+  </div>
+  <div class="modal-body">
+   <div class="row">
+      <div class="span3" id="existing_res">
+	<strong>Name for map:</strong> <input type="text" id="mapname" /></form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" onclick="$('#newmap').modal('hide');return false;">Cancel</a>
+    <a href="#" class="btn btn-primary" onclick="location.href='/maps/new/' + $('#mapname').val() + '/';return false;">Create map</a>
+  </div>
+</div>
+
+
 
 {% endblock %}

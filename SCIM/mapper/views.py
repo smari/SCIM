@@ -31,14 +31,13 @@ def home(request):
 
 
 @login_required
-def new(request):
-	ctx = {}
+def new(request, mapname):
+	map = Map()
+	map.name = mapname
+	map.user = request.user
+	map.save()
 
-	ctx["tiers"] = Tier.objects.all()
-	ctx["entityclasses"] = EntityClass.objects.all()
-	
-
-	return render_to_response("new.html", ctx, context_instance=RequestContext(request))
+	return HttpResponseRedirect("/maps/%d" % map.id)
 
 
 def viewmap(request, id):
