@@ -17,7 +17,10 @@ urlpatterns = patterns('',
 	url(r'^maps/serviceprovider/(?P<tier>\d+)/', 'mapper.views.get_serviceproviders' ),
 	url(r'^maps/serviceprovider/new/(?P<tier>\d+)/(?P<name>\s+)/', 'mapper.views.new_serviceprovider'),
 
-	url(r'^about/', TemplateView.as_view(template_name='about/how_scim_works.html')),
+	url(r'^about/$', TemplateView.as_view(template_name='about/how_scim_works.html')),
+	url(r'^about/license/$', TemplateView.as_view(template_name='about/license.html')),
+	url(r'^about/authors/$', TemplateView.as_view(template_name='about/authors.html')),
+	url(r'^about/kittens/$', TemplateView.as_view(template_name='about/kittens.html')),
 
 	(r'^accounts/', include('registration.urls')),
 	url(r'^accounts/profile/$', UpdateView.as_view(success_url="/accounts/profile/")),
