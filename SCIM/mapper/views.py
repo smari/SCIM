@@ -76,3 +76,19 @@ def new_resouce(request, serviceproviders, needs, name):
 	ctx["resource"] = {"name": r.name, "id": r.id}
 
 	return HttpResponse(json.dumps(ctx))
+
+
+@login_required
+def new_serviceprovider(request, tier, name):
+	ctx = {}
+
+	t = Tier.objects.get(id=tier)
+
+	s = ServiceProvider()
+	s.name = name
+	s.tier = t
+	s.save()
+
+	ctx["serviceprovider"] = {"name": s.name, "id": s.id}
+
+	return HttpResponse(json.dumps(ctx))
