@@ -52,9 +52,27 @@ def viewmap(request, id):
 
 @login_required
 def get_resources(request, tier, need):
-		ctx = {}
-		t = Tier.objects.get(id=tier)
-		n = Need.objects.get(id=need)
-		ctx["resources"] = list(Resource.objects.filter(serviceprovider__tier = t, needs = n))
+	ctx = {}
+	t = Tier.objects.get(id=tier)
+	n = Need.objects.get(id=need)
+	ctx["resources"] = list(Resource.objects.filter(serviceprovider__tier = t, needs = n))
 		
-		return HttpResponse(json.dumps(ctx))
+	return HttpResponse(json.dumps(ctx))
+
+
+
+@login_required
+def new_resouce(request, serviceproviders, needs, name):
+	ctx = {}
+	s = ServiceProvider.objects.filter(id__in=serviceproviders)
+	n = Need.objects.filter(id__in=needs)
+
+	r = Resource()
+	r.name = name
+	r.save()
+	r.need.add(n)
+	r.serviceprovider.add(s)
+
+	ctx["resource"] = {"name": r.name, "id": r.id}
+
+	return HttpResponse(json.dumps(ctx))
