@@ -13,8 +13,8 @@ ROADMAP
 -------
 
  * Version 1: Support grid view & individual mapping
- * Version 2: Link to OpenStreetMap and other systems to 
+ * Version 2: Add support for radial view and other layouts
+ * Version 3: Add support for groups, organizations & states
+ * Version 4: Link to OpenStreetMap and other systems to 
               automate infrastructure discovery
- * Version 3: Add support for radial view and other layouts
- * Version 4: Add support for groups, organizations & states
 

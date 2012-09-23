@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul class="nav nav-tabs" id="entityclasstabs">
+{% for entityclass in entityclasses %}
+  <li{% if forloop.first %} class="active"{% endif %}><a href="#entityclass{{entityclass.id}}" data-toggle="tab">{{entityclass.name}}</a></li>
+{% endfor %}
+</ul>
+
+<div class="tab-content">
+{% for entityclass in entityclasses %}
+	<div class="tab-pane{% if forloop.first %} active{% endif %}" id="entityclass{{entityclass.id}}">
+	<table class="table table-bordered table-hover">
+		<tr>
+		<th></th>
+		{% for tier in tiers %}
+		<th>{{tier.name}}</th>
+		{% endfor %}
+		</tr>
+
+		<tr>
+		<td><i>(Service providers)</i></td>
+		{% for tier in tiers %}
+		<td>
+			{% for sp in tier.serviceprovider_set.all %}
+			{{sp.name}}<br/>
+			{% endfor %}
+		</td>
+		{% endfor %}
+		</tr>
+
+		{% for need in entityclass.need_set.all %}
+		<tr>
+			<th>{{need.name}}</th>
+			{% for tier in tiers %}
+			<td onclick="newresource_show(this);return false;" id="cell_{{need.id}}_{{tier.id}}">
+				
+			</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+	</div>
+{% endfor %}
+</div>
+
+<div class="modal hide fade" id="newresource">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Resources</h3>
+  </div>
+  <div class="modal-body">
+   <div class="row">
+      <div class="span3">
+      {% if resources %}
+      <strong>Existing Resources:</strong>
+      <p>{% for resource in resources %}
+	      {{resource.name}} <br />
+	      {% endfor %}
+      </p>
+      {% endif %}
+      </div>
+     <div class="span3"><form>
+    <strong>New Resource:</strong> <input type="text" name="resource" /></form>
+    </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" onclick="$('#newresource').modal('hide');return false;">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>
+  </div>
+</div>
+
+<script>
+function newresource_show(cell) {
+  // Let's get the information from the database
+  // The cell.id is need_tier parse that to get the data
+  cellID = cell.id.split('_');
+  $.get("/maps/resources/"+cellID[1]+"/"+cellID[2]+"/",
+   function(data){
+     $('body').append( "Name: " + data ); // John
+   }, "json");
+
+  // Now lets show the list and form
+	$('#newresource').modal('show');
+}
+
+$(function(){
+	$('#entityclasstabs a').click(function (e) {
+	   e.preventDefault();
+	   $(this).tab('show');
+	});
+	$('#newresource').modal({'keyboard': true, 'show': false, 'backdrop': false});
+});
+</script>
+
+{% endblock %}

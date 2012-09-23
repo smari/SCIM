@@ -1,0 +1,21 @@
+[
+{"pk": 1, "model": "mapper.entityclass", "fields": {"name": "Individual"}}, 
+{"pk": 2, "model": "mapper.entityclass", "fields": {"name": "Group"}}, 
+{"pk": 3, "model": "mapper.entityclass", "fields": {"name": "Organization"}}, 
+{"pk": 4, "model": "mapper.entityclass", "fields": {"name": "State"}}, 
+
+{"pk": 1, "model": "mapper.need", "fields": {"entityclass": 1, "name": "Too hot"}}, 
+{"pk": 2, "model": "mapper.need", "fields": {"entityclass": 1, "name": "Too cold"}}, 
+{"pk": 3, "model": "mapper.need", "fields": {"entityclass": 1, "name": "Hunger"}}, 
+{"pk": 4, "model": "mapper.need", "fields": {"entityclass": 1, "name": "Thirst"}}, 
+{"pk": 5, "model": "mapper.need", "fields": {"entityclass": 1, "name": "Illness"}}, 
+{"pk": 6, "model": "mapper.need", "fields": {"entityclass": 1, "name": "Injury"}}, 
+
+{"pk": 1, "model": "mapper.tier", "fields": {"name": "Individual"}}, 
+{"pk": 2, "model": "mapper.tier", "fields": {"name": "Household"}}, 
+{"pk": 3, "model": "mapper.tier", "fields": {"name": "Village"}}, 
+{"pk": 4, "model": "mapper.tier", "fields": {"name": "Town"}}, 
+{"pk": 5, "model": "mapper.tier", "fields": {"name": "Region"}}, 
+{"pk": 6, "model": "mapper.tier", "fields": {"name": "Country"}}, 
+{"pk": 7, "model": "mapper.tier", "fields": {"name": "World"}}
+]

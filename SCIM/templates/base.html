@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Simple Critical Infrastructure Maps</title>
+		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+		<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+		
+		<script src="/static/js/OpenLayers.js"></script>
+		<script src="/static/js/jquery.js"></script>
+		<script src="/static/bootstrap/js/bootstrap.js"></script>
+
+		<link rel="shortcut icon" href="/static/img/favicon.ico"/>
+		<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png"/>
+		<link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-touch-icon-72x72.png"/>
+		<link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-touch-icon-114x114.png"/>
+		<style>
+		{% if not user.is_authenticated %}
+			body { padding-top: 0px; }
+		{% endif %}
+		body { margin-top: 70px; }
+		</style>
+	</head>
+	<body>
+
+{% if user.is_authenticated %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">SCIM</a>
+          <ul class="nav">
+            <li class="active"><a href="/">Your maps</a></li>
+            <li><a href="/about/">How SCIM Works</a></li>
+            <li><a href="/gallery/">Gallery</a></li>
+          </ul>
+          <ul class="nav secondary-nav">
+            <li><a href="/accounts/logout/">Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+    <div class="container">
+
+      <div class="content">
+		{% block content %}{% endblock %}
+      </div>
+
+	<hr/>
+
+      <footer>
+        <p><a href="/about/license/">License</a> &ndash; <a href="/about/authors/">Authors</a> &ndash; <a href="/about/kittens/">Kittens</a></p>
+      </footer>
+
+    </div>
+
+  </body>
+</html>
