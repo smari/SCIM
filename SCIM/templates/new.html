@@ -60,24 +60,32 @@
            </div>
      <div class="span3"><form>
     <strong>New Resource:</strong> <input type="text" name="resource" />
-    <strong>Provided By:</strong> <select name="providers" id="providers"><option value="none" label="select one"></option></select>
+    <strong>Provided By:</strong> <select name="providers" id="providers" onchange="newProvider();"><option value="none" label="select one"></option></select>
+				<span id="newprovidergroup" style="display: none;">
+					<input class="span2" id="newprovider" size="16" type="text"><button class="btn" type="button" onclick="oldProvider();return false;">Cancel</button>
+				</span>
     </form>
     </div>
     </div>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" onclick="$('#newresource').modal('hide');return false;">Close</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
+    <a href="#" class="btn btn-primary" onclick="saveResource();">Save changes</a>
   </div>
 </div>
 
 <script>
+var tier = 0;
+var need = 0;
+
 function newresource_show(cell) {
    $('#existing_res').html(""); 
    $('#providers').html(""); 
   // Let's get the information from the database
   // The cell.id is tier_need parse that to get the data
   cellID = cell.id.split('_');
+  tier = cellID[1];
+  need = cellID[2];
   $.get("/maps/resources/"+cellID[1]+"/"+cellID[2]+"/",
    function(data){
    console.log(data);
@@ -88,6 +96,7 @@ function newresource_show(cell) {
       }
       
      // walk through and display each data.resources[n].name
+
      for (res in existRes) {
    	  $('#existing_res').append(existRes[res].name + '<br />');
      }
@@ -95,7 +104,7 @@ function newresource_show(cell) {
      for (prov in existProv){
             $('#providers').append('<option value="'+existProv[prov].name+'" label="'+existProv[prov].name+'"></option>');
      }
-     $('#providers').append('<option value="new" label="new" onselect="newProvider();"></option>');
+     $('#providers').append('<option value="new" label="new"></option>');
      
      }, "json");
    
@@ -104,6 +113,26 @@ function newresource_show(cell) {
 }
 
 function newProvider(){
+	console.log("Fired!");
+	if ($("#providers").val() == "new") {
+		$("#providers").hide();
+		$("#newprovidergroup").show();
+	} else {
+		oldProvider();
+	}
+}
+
+function oldProvider() {
+	$("#newprovidergroup").hide();
+	$("#providers").show();
+}
+
+function saveResource() {
+	$("#newresource").modal('hide');
+	$.get("/maps/resources/"+tier+"/"+need+"/",
+		function(data){
+			
+		});
 	
 }
 
