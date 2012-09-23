@@ -59,7 +59,9 @@
       
            </div>
      <div class="span3"><form>
-    <strong>New Resource:</strong> <input type="text" name="resource" /></form>
+    <strong>New Resource:</strong> <input type="text" name="resource" />
+    <strong>Provided By:</strong> <select name="providers" id="providers"><option value="none" label="select one"></option></select>
+    </form>
     </div>
     </div>
   </div>
@@ -72,13 +74,15 @@
 <script>
 function newresource_show(cell) {
    $('#existing_res').html(""); 
-
+   $('#providers').html(""); 
   // Let's get the information from the database
   // The cell.id is tier_need parse that to get the data
   cellID = cell.id.split('_');
   $.get("/maps/resources/"+cellID[1]+"/"+cellID[2]+"/",
    function(data){
-      var existRes = data.resources;
+   console.log(data);
+     var existRes = data.resources;
+     var existProv = data.providers;
       if(existRes[0]){
       	$('#existing_res').append('<strong>Existing Resources</strong><br />');
       }
@@ -87,11 +91,20 @@ function newresource_show(cell) {
      for (res in existRes) {
    	  $('#existing_res').append(existRes[res].name + '<br />');
      }
-
+     
+     for (prov in existProv){
+            $('#providers').append('<option value="'+existProv[prov].name+'" label="'+existProv[prov].name+'"></option>');
+     }
+     $('#providers').append('<option value="new" label="new" onselect="newProvider();"></option>');
+     
      }, "json");
    
   // Now lets show the list and form
 	$('#newresource').modal('show');
+}
+
+function newProvider(){
+	
 }
 
 $(function(){
@@ -101,6 +114,8 @@ $(function(){
 	});
 	$('#newresource').modal({'keyboard': true, 'show': false, 'backdrop': false});
 });
+
+
 </script>
 
 {% endblock %}

@@ -54,10 +54,10 @@ def get_resources(request, tier, need):
 	ctx = {}
 	t = Tier.objects.get(id=tier)
 	n = Need.objects.get(id=need)
-	ctx["resources"] = list(Resource.objects.filter(serviceprovider__tier = t, needs = n))
+	ctx["resources"] = [x.todict() for x in Resource.objects.filter(serviceprovider__tier = t, needs = n)]
+	ctx["providers"] = [x.todict() for x in ServiceProvider.objects.filter(tier = t)]
 		
 	return HttpResponse(json.dumps(ctx))
-
 
 
 @login_required

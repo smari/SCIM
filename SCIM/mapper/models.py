@@ -29,7 +29,9 @@ class ServiceProvider(models.Model):
 	map		= models.ForeignKey(Map)
 	name		= models.CharField(max_length=100)
 	tier		= models.ForeignKey(Tier)
-
+	
+	def todict(self):
+		return {"name": self.name}
 
 class Resource(models.Model):
 	"""Food, electricity, etc."""
