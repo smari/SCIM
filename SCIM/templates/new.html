@@ -61,9 +61,9 @@
      <div class="span3"><form>
     <strong>New Resource:</strong> <input type="text" name="resource" />
     <strong>Provided By:</strong> <select name="providers" id="providers" onchange="newProvider();"><option value="none" label="select one"></option></select>
-				<span id="newprovidergroup" style="display: none;">
+				<div class="input-append"><span id="newprovidergroup" style="display: none;">
 					<input class="span2" id="newprovider" size="16" type="text"><button class="btn" type="button" onclick="oldProvider();return false;">Cancel</button>
-				</span>
+				</span></div>
     </form>
     </div>
     </div>
@@ -77,6 +77,7 @@
 <script>
 var tier = 0;
 var need = 0;
+var map = {{map.id}};
 
 function newresource_show(cell) {
    $('#existing_res').html(""); 
@@ -86,7 +87,7 @@ function newresource_show(cell) {
   cellID = cell.id.split('_');
   tier = cellID[1];
   need = cellID[2];
-  $.get("/maps/resources/"+cellID[1]+"/"+cellID[2]+"/",
+  $.get("/maps/" + map + "/resources/"+cellID[1]+"/"+cellID[2]+"/",
    function(data){
    console.log(data);
      var existRes = data.resources;
@@ -129,7 +130,7 @@ function oldProvider() {
 
 function saveResource() {
 	$("#newresource").modal('hide');
-	$.get("/maps/resources/"+tier+"/"+need+"/",
+	$.get("/maps/"+map+"/resources/"+tier+"/"+need+"/",
 		function(data){
 			
 		});

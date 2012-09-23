@@ -50,7 +50,7 @@ def viewmap(request, id):
 
 
 @login_required
-def get_resources(request, tier, need):
+def get_resources(request, id, tier, need):
 	ctx = {}
 	t = Tier.objects.get(id=tier)
 	n = Need.objects.get(id=need)
@@ -61,7 +61,7 @@ def get_resources(request, tier, need):
 
 
 @login_required
-def new_resouce(request, serviceproviders, needs, name):
+def new_resouce(request, id, serviceproviders, needs, name):
 	ctx = {}
 	s = ServiceProvider.objects.filter(id__in=serviceproviders)
 	n = Need.objects.filter(id__in=needs)
@@ -78,7 +78,7 @@ def new_resouce(request, serviceproviders, needs, name):
 
 
 @login_required
-def new_serviceprovider(request, tier, name):
+def new_serviceprovider(request, id, tier, name):
 	ctx = {}
 
 	t = Tier.objects.get(id=tier)
