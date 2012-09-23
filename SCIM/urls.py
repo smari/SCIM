@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 	url(r'^maps/new/', 'mapper.views.new'),
 	url(r'^maps/(?P<id>\d+)/', 'mapper.views.viewmap'),
 	url(r'^maps/resources/(?P<tier>\d+)/(?P<need>\d+)/', 'mapper.views.get_resources' ),
+	url(r'^about/', TemplateView.as_view(template_name='about/how_scim_works.html')),
 
 	(r'^accounts/', include('registration.urls')),
 	url(r'^accounts/profile/$', UpdateView.as_view(success_url="/accounts/profile/")),
