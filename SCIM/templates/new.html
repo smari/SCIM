@@ -93,11 +93,16 @@ function newresource_show(cell) {
      for (prov in existProv){
             $('#providers').append('<option value="'+existProv[prov].name+'" label="'+existProv[prov].name+'"></option>');
      }
-
+     $('#providers').append('<option value="new" label="new" onselect="newProvider();"></option>');
+     
      }, "json");
    
   // Now lets show the list and form
 	$('#newresource').modal('show');
+}
+
+function newProvider(){
+	
 }
 
 $(function(){
@@ -107,6 +112,8 @@ $(function(){
 	});
 	$('#newresource').modal({'keyboard': true, 'show': false, 'backdrop': false});
 });
+
+
 </script>
 
 {% endblock %}
