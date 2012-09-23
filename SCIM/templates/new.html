@@ -34,7 +34,7 @@
 		<tr>
 			<th>{{need.name}}</th>
 			{% for tier in tiers %}
-			<td onclick="newresource_show(this);return false;" id="cell_{{need.id}}_{{tier.id}}">
+			<td onclick="newresource_show(this);return false;" id="cell_{{tier.id}}_{{need.id}}">
 				
 			</td>
 			{% endfor %}
@@ -52,15 +52,11 @@
   </div>
   <div class="modal-body">
    <div class="row">
-      <div class="span3">
-      {% if resources %}
+      <div class="span3" id="existing_res">
+     
       <strong>Existing Resources:</strong>
-      <p>{% for resource in resources %}
-	      {{resource.name}} <br />
-	      {% endfor %}
-      </p>
-      {% endif %}
-      </div>
+      <p>
+           </div>
      <div class="span3"><form>
     <strong>New Resource:</strong> <input type="text" name="resource" /></form>
     </div>
@@ -74,14 +70,26 @@
 
 <script>
 function newresource_show(cell) {
+   $('#existing_res').html(""); 
+
   // Let's get the information from the database
-  // The cell.id is need_tier parse that to get the data
+  // The cell.id is tier_need parse that to get the data
   cellID = cell.id.split('_');
   $.get("/maps/resources/"+cellID[1]+"/"+cellID[2]+"/",
    function(data){
-     $('body').append( "Name: " + data ); // John
-   }, "json");
+      var existRes = data.resources;
+      if(existRes[0]){
+      	$('#existing_res').append('<strong>Existing Resources</strong><br />');
+      }
+      
+     // walk through and display each data.resources[n].name
+     for (res in existRes) {
+   	  $('#existing_res').append(existRes[res].name + '<br />');
+     }
 
+     }, "json");
+   
+   $('#existing_res').append("</p>");
   // Now lets show the list and form
 	$('#newresource').modal('show');
 }

@@ -38,4 +38,6 @@ class Resource(models.Model):
 	needs		= models.ManyToManyField(Need)
 	serviceprovider = models.ManyToManyField(ServiceProvider)
 	dependency	= models.ManyToManyField('Resource')
-
+	
+	def todict(self):
+		return {"name": self.name}
