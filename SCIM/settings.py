@@ -148,3 +148,7 @@ LOGGING = {
         },
     }
 }
+
+
+ACCOUNT_ACTIVATION_DAYS = 30
+
